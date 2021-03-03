@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './class/library'
 require_relative 'command'
 

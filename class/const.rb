@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Const to store the response and size constant
 class Const
   attr_reader :response, :size

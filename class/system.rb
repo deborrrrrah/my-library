@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './class/commands/build_library_command'
 require './class/commands/find_book_command'
 require './class/commands/list_books_command'
@@ -34,7 +36,7 @@ class System
   end
 
   def execute(command, args)
-    if @commands.has_key?(command)
+    if @commands.key?(command)
       command = command.strip
       args = remove_white_space_args(args)
       if @commands[command].args_valid?(args)

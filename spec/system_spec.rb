@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../class/system'
 require '../class/commands/build_library_command'
 require '../class/commands/find_book_command'

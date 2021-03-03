@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Parent for the rest of the Command
 class Command
   def args_valid?(args)

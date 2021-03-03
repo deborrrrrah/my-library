@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../class/commands/build_library_command'
 
 RSpec.describe 'BuildLibraryCommand' do

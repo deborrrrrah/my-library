@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require './class/system'
 
 class Main
-  while true
+  loop do
     command, *args = gets.chomp.split('|')
     begin
       System.instance.execute(command, args)
-    rescue => error
-      puts "#{error.class}: #{error.message}\n\n"
+    rescue StandardError => e
+      puts "#{e.class}: #{e.message}\n\n"
     end
   end
 end

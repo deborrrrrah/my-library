@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../class/commands/command'
 
 RSpec.describe 'Command' do

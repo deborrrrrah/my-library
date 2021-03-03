@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Book to store the information of the book i.e. isbn, author, title
 class Book
   attr_reader :isbn, :author, :title

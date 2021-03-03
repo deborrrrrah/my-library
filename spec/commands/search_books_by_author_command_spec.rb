@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../class/commands/search_books_by_author_command'
 require '../class/library'
 

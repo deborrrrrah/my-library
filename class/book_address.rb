@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'const'
 
 # BookAddress to determine the shelf, row, and column position in BookCollection

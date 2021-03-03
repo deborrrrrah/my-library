@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../class/book_address'
 
 RSpec.describe 'BookAddress' do
@@ -26,30 +28,30 @@ RSpec.describe 'BookAddress' do
   describe '#==' do
     it 'return true of the exact same address attributes' do
       book_address1 = BookAddress.new({
-                                         shelf: 1,
-                                         row: 1,
-                                         column: 1
-                                       })
+                                        shelf: 1,
+                                        row: 1,
+                                        column: 1
+                                      })
       book_address2 = BookAddress.new({
-                                         shelf: 1,
-                                         row: 1,
-                                         column: 1
-                                       })
+                                        shelf: 1,
+                                        row: 1,
+                                        column: 1
+                                      })
       result = book_address1 == book_address2
       expect(result).to eq(true)
     end
 
     it 'return false of the different address attributes' do
       book_address1 = BookAddress.new({
-                                         shelf: 1,
-                                         row: 1,
-                                         column: 1
-                                       })
+                                        shelf: 1,
+                                        row: 1,
+                                        column: 1
+                                      })
       book_address2 = BookAddress.new({
-                                         shelf: 2,
-                                         row: 1,
-                                         column: 1
-                                       })
+                                        shelf: 2,
+                                        row: 1,
+                                        column: 1
+                                      })
       result = book_address1 == book_address2
       expect(result).to eq(false)
     end

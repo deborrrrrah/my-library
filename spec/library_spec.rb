@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../class/const'
 require '../class/book'
 require '../class/library'
