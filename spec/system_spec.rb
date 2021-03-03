@@ -72,6 +72,12 @@ RSpec.describe 'System' do
       expect { System.instance.execute(command, args) }.to raise_error(ArgumentError)
     end
 
+    it 'raise ArgumentError due to nil command for enter input' do
+      command = nil
+      args = []
+      expect { System.instance.execute(command, args) }.to raise_error(ArgumentError)
+    end
+
     it 'raise ArgumentError when command destroy which is not recognized' do
       command = 'destroy'
       args = []

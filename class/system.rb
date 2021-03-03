@@ -36,8 +36,8 @@ class System
   end
 
   def execute(command, args)
+    command = command.nil? ? '' : command.strip
     if @commands.key?(command)
-      command = command.strip
       args = remove_white_space_args(args)
       if @commands[command].args_valid?(args)
         @commands[command].execute(args)

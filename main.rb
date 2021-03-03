@@ -2,6 +2,7 @@
 
 require './class/system'
 
+# Main class to run the system
 class Main
   loop do
     command, *args = gets.chomp.split('|')
