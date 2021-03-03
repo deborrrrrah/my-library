@@ -9,10 +9,10 @@ RSpec.describe MyLibrary::BookCollection do
       @book_collection = MyLibrary::BookCollection.new
       @book_address = '010101'
       @book = MyLibrary::Book.new({
-                         isbn: '1234567890123',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890123',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       @book_collection.insert(@book_address, @book)
     end
 
@@ -46,10 +46,10 @@ RSpec.describe MyLibrary::BookCollection do
       book_collection = MyLibrary::BookCollection.new
       book_address = '010101'
       book = MyLibrary::Book.new({
-                        isbn: '1234567890123',
-                        author: 'J. K. Rowling',
-                        title: 'Harry Potter'
-                      })
+                                   isbn: '1234567890123',
+                                   author: 'J. K. Rowling',
+                                   title: 'Harry Potter'
+                                 })
       result = book_collection.insert(book_address, book)
       inserted_book = book_collection.get_book(book_address)
       expect(result).to eq(MyLibrary::Const.instance.response[:success])
@@ -60,10 +60,10 @@ RSpec.describe MyLibrary::BookCollection do
       book_collection = MyLibrary::BookCollection.new
       book_address = '010101'
       book = MyLibrary::Book.new({
-                        isbn: '123456789012',
-                        author: 'J. K. Rowling',
-                        title: 'Harry Potter'
-                      })
+                                   isbn: '123456789012',
+                                   author: 'J. K. Rowling',
+                                   title: 'Harry Potter'
+                                 })
       result = book_collection.insert(book_address, book)
       inserted_book = book_collection.get_book(book_address)
       expect(result).to eq(MyLibrary::Const.instance.response[:invalid_book])
@@ -74,16 +74,16 @@ RSpec.describe MyLibrary::BookCollection do
       book_collection = MyLibrary::BookCollection.new
       book_address = MyLibrary::BookAddress.new.string_to_book_address('010101')
       book1 = MyLibrary::Book.new({
-                         isbn: '1234567890123',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890123',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       book_collection.insert(book_address, book1)
       book2 = MyLibrary::Book.new({
-                         isbn: '1234567890124',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890124',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       result = book_collection.insert(book_address, book2)
       inserted_book = book_collection.get_book(book_address)
       expect(result).to eq(MyLibrary::Const.instance.response[:failed])
@@ -94,17 +94,17 @@ RSpec.describe MyLibrary::BookCollection do
       book_collection = MyLibrary::BookCollection.new
       book_address1 = MyLibrary::BookAddress.new.string_to_book_address('010101')
       book1 = MyLibrary::Book.new({
-                         isbn: '1234567890123',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890123',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       book_collection.insert(book_address1, book1)
       book_address2 = MyLibrary::BookAddress.new.string_to_book_address('010102')
       book2 = MyLibrary::Book.new({
-                         isbn: '1234567890123',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890123',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       result = book_collection.insert(book_address2, book2)
       inserted_book = book_collection.get_book(book_address2)
       expect(result).to eq(MyLibrary::Const.instance.response[:already_exist])
@@ -117,15 +117,15 @@ RSpec.describe MyLibrary::BookCollection do
       @book_collection = MyLibrary::BookCollection.new
       @books = [
         MyLibrary::Book.new({
-                   isbn: '1234567890123',
-                   author: 'J. K. Rowling',
-                   title: 'Harry Potter'
-                 }),
+                              isbn: '1234567890123',
+                              author: 'J. K. Rowling',
+                              title: 'Harry Potter'
+                            }),
         MyLibrary::Book.new({
-                   isbn: '1234567890124',
-                   author: 'Robert Cecil Martin',
-                   title: 'Clean Code'
-                 })
+                              isbn: '1234567890124',
+                              author: 'Robert Cecil Martin',
+                              title: 'Clean Code'
+                            })
       ]
       @book_collection.insert('010101', @books[0])
       @book_collection.insert('010102', @books[1])
@@ -171,10 +171,10 @@ RSpec.describe MyLibrary::BookCollection do
       book_collection = MyLibrary::BookCollection.new
       book_address = '010101'
       book = MyLibrary::Book.new({
-                        isbn: '1234567890123',
-                        author: 'J. K. Rowling',
-                        title: 'Harry Potter'
-                      })
+                                   isbn: '1234567890123',
+                                   author: 'J. K. Rowling',
+                                   title: 'Harry Potter'
+                                 })
       book_collection.insert(book_address, book)
       result = book_collection.to_s
       expect(result).to eq('010101: 1234567890123 | Harry Potter | J. K. Rowling')
@@ -185,15 +185,15 @@ RSpec.describe MyLibrary::BookCollection do
       book_address1 = '010101'
       book_address2 = '010102'
       book1 = MyLibrary::Book.new({
-                         isbn: '1234567890123',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890123',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       book2 = MyLibrary::Book.new({
-                         isbn: '1234567890124',
-                         author: 'J. K. Rowling',
-                         title: 'Harry Potter'
-                       })
+                                    isbn: '1234567890124',
+                                    author: 'J. K. Rowling',
+                                    title: 'Harry Potter'
+                                  })
       book_collection.insert(book_address1, book1)
       book_collection.insert(book_address2, book2)
       result = book_collection.to_s
@@ -207,20 +207,20 @@ RSpec.describe MyLibrary::BookCollection do
       @book_collection = MyLibrary::BookCollection.new
       @books = [
         MyLibrary::Book.new({
-                   isbn: '1234567890123',
-                   author: 'J. K. Rowling',
-                   title: 'Harry Potter'
-                 }),
+                              isbn: '1234567890123',
+                              author: 'J. K. Rowling',
+                              title: 'Harry Potter'
+                            }),
         MyLibrary::Book.new({
-                   isbn: '1234567890124',
-                   author: 'Robert Cecil Martin',
-                   title: 'Clean Code'
-                 }),
+                              isbn: '1234567890124',
+                              author: 'Robert Cecil Martin',
+                              title: 'Clean Code'
+                            }),
         MyLibrary::Book.new({
-                   isbn: '1234567890125',
-                   author: 'Robert Cecil Martin',
-                   title: 'Clean Code'
-                 })
+                              isbn: '1234567890125',
+                              author: 'Robert Cecil Martin',
+                              title: 'Clean Code'
+                            })
       ]
       @book_collection.insert('010101', @books[0])
       @book_collection.insert('010102', @books[1])

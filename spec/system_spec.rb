@@ -4,7 +4,6 @@ require './spec/spec_helper'
 
 RSpec.describe MyLibrary::System do
   describe '#execute' do
-
     it 'stub BuildLibraryCommand#execute when command is build_library' do
       command = 'build_library'
       args = %w[2 1 3]

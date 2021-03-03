@@ -10,7 +10,7 @@ RSpec.describe MyLibrary::ExitCommand do
       expect(command.args_valid?(args)).to eq(true)
     end
   end
-  
+
   describe '#execute' do
     it 'raised SystemExit when command is exit' do
       command = MyLibrary::ExitCommand.new

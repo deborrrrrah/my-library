@@ -6,20 +6,20 @@ RSpec.describe MyLibrary::BookAddress do
   describe '#to_s' do
     it 'return 010101' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: 1,
-                                       row: 1,
-                                       column: 1
-                                     })
+                                                  shelf: 1,
+                                                  row: 1,
+                                                  column: 1
+                                                })
       result = book_address.to_s
       expect(result).to eq('010101')
     end
 
     it 'return 100101' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: 10,
-                                       row: 1,
-                                       column: 1
-                                     })
+                                                  shelf: 10,
+                                                  row: 1,
+                                                  column: 1
+                                                })
       result = book_address.to_s
       expect(result).to eq('100101')
     end
@@ -28,30 +28,30 @@ RSpec.describe MyLibrary::BookAddress do
   describe '#==' do
     it 'return true of the exact same address attributes' do
       book_address1 = MyLibrary::BookAddress.new({
-                                        shelf: 1,
-                                        row: 1,
-                                        column: 1
-                                      })
+                                                   shelf: 1,
+                                                   row: 1,
+                                                   column: 1
+                                                 })
       book_address2 = MyLibrary::BookAddress.new({
-                                        shelf: 1,
-                                        row: 1,
-                                        column: 1
-                                      })
+                                                   shelf: 1,
+                                                   row: 1,
+                                                   column: 1
+                                                 })
       result = book_address1 == book_address2
       expect(result).to eq(true)
     end
 
     it 'return false of the different address attributes' do
       book_address1 = MyLibrary::BookAddress.new({
-                                        shelf: 1,
-                                        row: 1,
-                                        column: 1
-                                      })
+                                                   shelf: 1,
+                                                   row: 1,
+                                                   column: 1
+                                                 })
       book_address2 = MyLibrary::BookAddress.new({
-                                        shelf: 2,
-                                        row: 1,
-                                        column: 1
-                                      })
+                                                   shelf: 2,
+                                                   row: 1,
+                                                   column: 1
+                                                 })
       result = book_address1 == book_address2
       expect(result).to eq(false)
     end
@@ -60,30 +60,30 @@ RSpec.describe MyLibrary::BookAddress do
   describe '#string_to_book_address' do
     it 'return right book address when set 010101' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: 1,
-                                       row: 1,
-                                       column: 1
-                                     })
+                                                  shelf: 1,
+                                                  row: 1,
+                                                  column: 1
+                                                })
       result = MyLibrary::BookAddress.new.string_to_book_address('010101')
       expect(result).to eq(book_address)
     end
 
     it 'return right book address when set 100101' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: 10,
-                                       row: 1,
-                                       column: 1
-                                     })
+                                                  shelf: 10,
+                                                  row: 1,
+                                                  column: 1
+                                                })
       result = MyLibrary::BookAddress.new.string_to_book_address('100101')
       expect(result).to eq(book_address)
     end
 
     it 'return right book address when set 999999' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: 99,
-                                       row: 99,
-                                       column: 99
-                                     })
+                                                  shelf: 99,
+                                                  row: 99,
+                                                  column: 99
+                                                })
       result = MyLibrary::BookAddress.new.string_to_book_address('999999')
       expect(result).to eq(book_address)
     end
@@ -107,10 +107,10 @@ RSpec.describe MyLibrary::BookAddress do
 
     it 'return false for shelf -1, row 1, column 1' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: -1,
-                                       row: 1,
-                                       column: 1
-                                     })
+                                                  shelf: -1,
+                                                  row: 1,
+                                                  column: 1
+                                                })
       result = book_address.valid?
       expect(result).to eq(false)
     end
@@ -135,10 +135,10 @@ RSpec.describe MyLibrary::BookAddress do
 
     it 'return false for shelf 1, row 100, column 1' do
       book_address = MyLibrary::BookAddress.new({
-                                       shelf: 1,
-                                       row: 100,
-                                       column: 1
-                                     })
+                                                  shelf: 1,
+                                                  row: 100,
+                                                  column: 1
+                                                })
       result = book_address.valid?
       expect(result).to eq(false)
     end

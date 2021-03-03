@@ -8,7 +8,7 @@ module MyLibrary
     def args_valid?(_args)
       true
     end
-    
+
     def execute(_args = [])
       exit
     end
