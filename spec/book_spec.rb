@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require '../class/book'
+require './spec/spec_helper'
 
-RSpec.describe 'Book' do
+RSpec.describe MyLibrary::Book do
   describe '#valid?' do
     it 'return false when empty strings as parameters' do
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '',
                         author: '',
                         title: ''
@@ -15,7 +15,7 @@ RSpec.describe 'Book' do
     end
 
     it 'return true when got valid parameters' do
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '1234567890123',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
@@ -25,7 +25,7 @@ RSpec.describe 'Book' do
     end
 
     it 'return false when isbn parameter is not 13-length string' do
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '123456789012',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
@@ -35,7 +35,7 @@ RSpec.describe 'Book' do
     end
 
     it 'return false when isbn contain char' do
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '123456789012a',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
@@ -47,13 +47,13 @@ RSpec.describe 'Book' do
 
   describe '#==' do
     it 'return true when same object attributes' do
-      book1 = Book.new({
+      book1 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
 
-      book2 = Book.new({
+      book2 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
@@ -63,13 +63,13 @@ RSpec.describe 'Book' do
     end
 
     it 'return true when same isbn different author and title' do
-      book1 = Book.new({
+      book1 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
 
-      book2 = Book.new({
+      book2 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. L. Rowling',
                          title: 'Harry Weasley'
@@ -79,13 +79,13 @@ RSpec.describe 'Book' do
     end
 
     it 'return false when different object attributes' do
-      book1 = Book.new({
+      book1 = MyLibrary::Book.new({
                          isbn: '1234567890122',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
 
-      book2 = Book.new({
+      book2 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
@@ -97,7 +97,7 @@ RSpec.describe 'Book' do
 
   describe '#to_s' do
     it 'return the empty format of to_s' do
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '',
                         author: '',
                         title: ''
@@ -107,7 +107,7 @@ RSpec.describe 'Book' do
     end
 
     it 'return the right format of to_s' do
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '1234567890123',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
@@ -120,7 +120,7 @@ RSpec.describe 'Book' do
   describe '#author_contains' do
     context 'when book is valid' do
       before(:all) do
-        @book = Book.new({
+        @book = MyLibrary::Book.new({
                            isbn: '1234567890123',
                            author: 'J. K. Rowling',
                            title: 'Harry Potter'
@@ -147,7 +147,7 @@ RSpec.describe 'Book' do
   describe '#title_contains' do
     context 'when book is valid' do
       before(:all) do
-        @book = Book.new({
+        @book = MyLibrary::Book.new({
                            isbn: '1234567890123',
                            author: 'J. K. Rowling',
                            title: 'Harry Potter'

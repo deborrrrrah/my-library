@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
-require '../class/commands/search_books_by_title_command'
-require '../class/library'
+require './spec/spec_helper'
 
-RSpec.describe 'SearchBooksByTitleCommand' do
+RSpec.describe MyLibrary::SearchBooksByTitleCommand do
   describe '#args_valid?' do
     it 'return true when argument only consist of one element' do
-      command = SearchBooksByTitleCommand.new
+      command = MyLibrary::SearchBooksByTitleCommand.new
       args = ['Harry Potter 1']
       expect(command.args_valid?(args)).to eq(true)
     end
 
     it 'return false when argument only consist of two element' do
-      command = SearchBooksByTitleCommand.new
+      command = MyLibrary::SearchBooksByTitleCommand.new
       args = ['Harry Potter 1', 'another params']
       expect(command.args_valid?(args)).to eq(false)
     end
@@ -20,9 +19,9 @@ RSpec.describe 'SearchBooksByTitleCommand' do
 
   describe '#execute' do
     it 'stub Library#search_book_by_title' do
-      command = SearchBooksByTitleCommand.new
+      command = MyLibrary::SearchBooksByTitleCommand.new
       args = ['Harry Potter 1']
-      expect_any_instance_of(Library).to receive(:search_book_by_title).with(args[0])
+      expect_any_instance_of(MyLibrary::Library).to receive(:search_book_by_title).with(args[0])
       command.execute(args)
     end
   end

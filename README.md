@@ -37,7 +37,7 @@ bundle install
 ```
 2. Run the testing code by using 
 ```
-rspec -fd
+rake spec
 ```
 3. Run the app by using 
 ```

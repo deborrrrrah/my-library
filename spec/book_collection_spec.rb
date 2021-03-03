@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
-require '../class/const'
-require '../class/book'
-require '../class/book_collection'
-require '../class/book_address'
+require './spec/spec_helper'
 
-RSpec.describe 'BookCollection' do
+RSpec.describe MyLibrary::BookCollection do
   context 'when need empty and non-empty book collection' do
     before(:all) do
-      @empty_book_collection = BookCollection.new
-      @book_collection = BookCollection.new
+      @empty_book_collection = MyLibrary::BookCollection.new
+      @book_collection = MyLibrary::BookCollection.new
       @book_address = '010101'
-      @book = Book.new({
+      @book = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
@@ -46,85 +43,85 @@ RSpec.describe 'BookCollection' do
 
   describe '#insert' do
     it 'return success response' do
-      book_collection = BookCollection.new
+      book_collection = MyLibrary::BookCollection.new
       book_address = '010101'
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '1234567890123',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
                       })
       result = book_collection.insert(book_address, book)
       inserted_book = book_collection.get_book(book_address)
-      expect(result).to eq(Const.instance.response[:success])
+      expect(result).to eq(MyLibrary::Const.instance.response[:success])
       expect(inserted_book).to eq(book)
     end
 
     it 'return invalid book response' do
-      book_collection = BookCollection.new
+      book_collection = MyLibrary::BookCollection.new
       book_address = '010101'
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '123456789012',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
                       })
       result = book_collection.insert(book_address, book)
       inserted_book = book_collection.get_book(book_address)
-      expect(result).to eq(Const.instance.response[:invalid_book])
+      expect(result).to eq(MyLibrary::Const.instance.response[:invalid_book])
       expect(inserted_book).to eq(nil)
     end
 
     it 'return failed insert response due to not empty address' do
-      book_collection = BookCollection.new
-      book_address = BookAddress.new.string_to_book_address('010101')
-      book1 = Book.new({
+      book_collection = MyLibrary::BookCollection.new
+      book_address = MyLibrary::BookAddress.new.string_to_book_address('010101')
+      book1 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
       book_collection.insert(book_address, book1)
-      book2 = Book.new({
+      book2 = MyLibrary::Book.new({
                          isbn: '1234567890124',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
       result = book_collection.insert(book_address, book2)
       inserted_book = book_collection.get_book(book_address)
-      expect(result).to eq(Const.instance.response[:failed])
+      expect(result).to eq(MyLibrary::Const.instance.response[:failed])
       expect(inserted_book).to eq(book1)
     end
 
     it 'return already_exist response due to not same book' do
-      book_collection = BookCollection.new
-      book_address1 = BookAddress.new.string_to_book_address('010101')
-      book1 = Book.new({
+      book_collection = MyLibrary::BookCollection.new
+      book_address1 = MyLibrary::BookAddress.new.string_to_book_address('010101')
+      book1 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
       book_collection.insert(book_address1, book1)
-      book_address2 = BookAddress.new.string_to_book_address('010102')
-      book2 = Book.new({
+      book_address2 = MyLibrary::BookAddress.new.string_to_book_address('010102')
+      book2 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
       result = book_collection.insert(book_address2, book2)
       inserted_book = book_collection.get_book(book_address2)
-      expect(result).to eq(Const.instance.response[:already_exist])
+      expect(result).to eq(MyLibrary::Const.instance.response[:already_exist])
       expect(inserted_book).to eq(nil)
     end
   end
 
   context 'when library is not empty' do
     before(:all) do
-      @book_collection = BookCollection.new
+      @book_collection = MyLibrary::BookCollection.new
       @books = [
-        Book.new({
+        MyLibrary::Book.new({
                    isbn: '1234567890123',
                    author: 'J. K. Rowling',
                    title: 'Harry Potter'
                  }),
-        Book.new({
+        MyLibrary::Book.new({
                    isbn: '1234567890124',
                    author: 'Robert Cecil Martin',
                    title: 'Clean Code'
@@ -139,14 +136,14 @@ RSpec.describe 'BookCollection' do
         book_address = '010101'
         result = @book_collection.delete(book_address)
         deleted_book = @book_collection.get_book(book_address)
-        expect(result).to eq(Const.instance.response[:success])
+        expect(result).to eq(MyLibrary::Const.instance.response[:success])
         expect(deleted_book).to eq(nil)
       end
 
       it 'return failed response because the address has no book' do
         book_address = '010103'
         result = @book_collection.delete(book_address)
-        expect(result).to eq(Const.instance.response[:failed])
+        expect(result).to eq(MyLibrary::Const.instance.response[:failed])
       end
     end
 
@@ -165,15 +162,15 @@ RSpec.describe 'BookCollection' do
 
   describe '#to_s' do
     it 'return empty string' do
-      book_collection = BookCollection.new
+      book_collection = MyLibrary::BookCollection.new
       result = book_collection.to_s
       expect(result).to eq('')
     end
 
     it 'return string of one book' do
-      book_collection = BookCollection.new
+      book_collection = MyLibrary::BookCollection.new
       book_address = '010101'
-      book = Book.new({
+      book = MyLibrary::Book.new({
                         isbn: '1234567890123',
                         author: 'J. K. Rowling',
                         title: 'Harry Potter'
@@ -184,15 +181,15 @@ RSpec.describe 'BookCollection' do
     end
 
     it 'return string of more than one book' do
-      book_collection = BookCollection.new
+      book_collection = MyLibrary::BookCollection.new
       book_address1 = '010101'
       book_address2 = '010102'
-      book1 = Book.new({
+      book1 = MyLibrary::Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
-      book2 = Book.new({
+      book2 = MyLibrary::Book.new({
                          isbn: '1234567890124',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
@@ -207,19 +204,19 @@ RSpec.describe 'BookCollection' do
 
   context 'when book collection consist of many books' do
     before(:all) do
-      @book_collection = BookCollection.new
+      @book_collection = MyLibrary::BookCollection.new
       @books = [
-        Book.new({
+        MyLibrary::Book.new({
                    isbn: '1234567890123',
                    author: 'J. K. Rowling',
                    title: 'Harry Potter'
                  }),
-        Book.new({
+        MyLibrary::Book.new({
                    isbn: '1234567890124',
                    author: 'Robert Cecil Martin',
                    title: 'Clean Code'
                  }),
-        Book.new({
+        MyLibrary::Book.new({
                    isbn: '1234567890125',
                    author: 'Robert Cecil Martin',
                    title: 'Clean Code'
@@ -231,7 +228,7 @@ RSpec.describe 'BookCollection' do
 
     describe '#==' do
       it 'return true' do
-        another_book_collection = BookCollection.new
+        another_book_collection = MyLibrary::BookCollection.new
         another_book_collection.insert('010101', @books[0])
         another_book_collection.insert('010102', @books[1])
         result = @book_collection == another_book_collection
@@ -239,7 +236,7 @@ RSpec.describe 'BookCollection' do
       end
 
       it 'return false when different address' do
-        another_book_collection = BookCollection.new
+        another_book_collection = MyLibrary::BookCollection.new
         another_book_collection.insert('010101', @books[0])
         another_book_collection.insert('010103', @books[1])
         result = @book_collection == another_book_collection
@@ -247,7 +244,7 @@ RSpec.describe 'BookCollection' do
       end
 
       it 'return false when different books' do
-        another_book_collection = BookCollection.new
+        another_book_collection = MyLibrary::BookCollection.new
         another_book_collection.insert('010101', @books[1])
         another_book_collection.insert('010102', @books[0])
         result = @book_collection == another_book_collection
@@ -268,31 +265,31 @@ RSpec.describe 'BookCollection' do
     end
 
     describe '.search_book_by_title' do
-      it 'return empty BookCollection' do
-        expected = BookCollection.new
-        result = BookCollection.search_book_by_title(@book_collection, 'ruby')
+      it 'return empty MyLibrary::BookCollection' do
+        expected = MyLibrary::BookCollection.new
+        result = MyLibrary::BookCollection.search_book_by_title(@book_collection, 'ruby')
         expect(result).to eq(expected)
       end
 
-      it 'return a BookCollection consist of a book' do
-        expected = BookCollection.new
+      it 'return a MyLibrary::BookCollection consist of a book' do
+        expected = MyLibrary::BookCollection.new
         expected.insert('010102', @books[1])
-        result = BookCollection.search_book_by_title(@book_collection, 'code')
+        result = MyLibrary::BookCollection.search_book_by_title(@book_collection, 'code')
         expect(result).to eq(expected)
       end
     end
 
     describe '.search_book_by_author' do
-      it 'return empty BookCollection' do
-        expected = BookCollection.new
-        result = BookCollection.search_book_by_author(@book_collection, 'ruby')
+      it 'return empty MyLibrary::BookCollection' do
+        expected = MyLibrary::BookCollection.new
+        result = MyLibrary::BookCollection.search_book_by_author(@book_collection, 'ruby')
         expect(result).to eq(expected)
       end
 
-      it 'return a BookCollection consist of a book' do
-        expected = BookCollection.new
+      it 'return a MyLibrary::BookCollection consist of a book' do
+        expected = MyLibrary::BookCollection.new
         expected.insert('010102', @books[1])
-        result = BookCollection.search_book_by_author(@book_collection, 'rob')
+        result = MyLibrary::BookCollection.search_book_by_author(@book_collection, 'rob')
         expect(result).to eq(expected)
       end
     end

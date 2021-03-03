@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require '../class/commands/command'
+require './spec/spec_helper'
 
-RSpec.describe 'Command' do
+RSpec.describe MyLibrary::Command do
   describe '#args_valid?' do
     it 'raised NotImplementedError when not override' do
-      command = Command.new
+      command = MyLibrary::Command.new
       args = {}
       expect { command.args_valid?(args) }.to raise_error(NotImplementedError)
     end
@@ -13,7 +13,7 @@ RSpec.describe 'Command' do
 
   describe '#execute' do
     it 'raised NotImplementedError when not override' do
-      command = Command.new
+      command = MyLibrary::Command.new
       args = {}
       expect { command.execute(args) }.to raise_error(NotImplementedError)
     end
