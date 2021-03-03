@@ -7,6 +7,7 @@ require './class/commands/put_book_command'
 require './class/commands/search_books_by_author_command'
 require './class/commands/search_books_by_title_command'
 require './class/commands/take_book_command'
+require './class/commands/exit_command'
 
 # System to execute and clean the arguments
 class System
@@ -19,6 +20,7 @@ class System
     @commands['search_books_by_author'] = SearchBooksByAuthorCommand.new
     @commands['search_books_by_title'] = SearchBooksByTitleCommand.new
     @commands['take_book_from'] = TakeBookCommand.new
+    @commands['exit'] = ExitCommand.new
   end
 
   @@instance = System.new
@@ -44,8 +46,6 @@ class System
       else
         raise ArgumentError, "Invalid arguments #{args} for #{command}"
       end
-    elsif command == 'exit'
-      exit
     else
       raise ArgumentError, "Command '#{command}' is not recognized"
     end

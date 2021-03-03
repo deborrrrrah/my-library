@@ -8,14 +8,10 @@ require '../class/commands/put_book_command'
 require '../class/commands/search_books_by_author_command'
 require '../class/commands/search_books_by_title_command'
 require '../class/commands/take_book_command'
+require '../class/commands/exit_command'
 
 RSpec.describe 'System' do
   describe '#execute' do
-    it 'raised exit when command is exit' do
-      command = 'exit'
-      args = []
-      expect { System.instance.execute(command, args) }.to raise_error(SystemExit)
-    end
 
     it 'stub BuildLibraryCommand#execute when command is build_library' do
       command = 'build_library'
@@ -82,6 +78,12 @@ RSpec.describe 'System' do
       command = 'destroy'
       args = []
       expect { System.instance.execute(command, args) }.to raise_error(ArgumentError)
+    end
+
+    it 'raised SystemExit due to ExitCommand#execute' do
+      command = 'exit'
+      args = []
+      expect { System.instance.execute(command, args) }.to raise_error(SystemExit)
     end
   end
 end
