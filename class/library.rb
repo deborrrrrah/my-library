@@ -17,7 +17,7 @@ class Library
     @shelf_size = params[:shelf_size]
     @row_size = params[:row_size]
     @column_size = params[:column_size]
-    @available_position = BookAddress.new.set_from_string_address('010101')
+    @available_position = BookAddress.new.string_to_book_address('010101')
     if valid?
       @shelf_size.times do |shelf_id|
         puts "Shelf #{shelf_id + 1} with #{@row_size} rows and #{@column_size} columns is added "
@@ -69,7 +69,7 @@ class Library
   end
 
   def address_valid?(address)
-    book_address = BookAddress.new.set_from_string_address(address)
+    book_address = BookAddress.new.string_to_book_address(address)
     return false unless book_address.shelf_in_range?(0, @shelf_size + 1)
     return false unless book_address.row_in_range?(0, @row_size + 1)
     return false unless book_address.column_in_range?(0, @column_size + 1)
@@ -85,7 +85,7 @@ class Library
       response = @book_collection.delete(address)
       if response == Const.instance.response[:success]
         if full? || address.to_s < @available_position.to_s
-          @available_position = BookAddress.new.set_from_string_address(address)
+          @available_position = BookAddress.new.string_to_book_address(address)
         end
         puts "Slot #{address} is free"
       elsif response == Const.instance.response[:failed]

@@ -75,7 +75,7 @@ RSpec.describe 'BookCollection' do
 
     it 'return failed insert response due to not empty address' do
       book_collection = BookCollection.new
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       book1 = Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
@@ -95,14 +95,14 @@ RSpec.describe 'BookCollection' do
 
     it 'return already_exist response due to not same book' do
       book_collection = BookCollection.new
-      book_address1 = BookAddress.new.set_from_string_address('010101')
+      book_address1 = BookAddress.new.string_to_book_address('010101')
       book1 = Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',
                          title: 'Harry Potter'
                        })
       book_collection.insert(book_address1, book1)
-      book_address2 = BookAddress.new.set_from_string_address('010102')
+      book_address2 = BookAddress.new.string_to_book_address('010102')
       book2 = Book.new({
                          isbn: '1234567890123',
                          author: 'J. K. Rowling',

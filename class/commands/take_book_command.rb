@@ -9,7 +9,7 @@ class TakeBookCommand < Command
     return false unless args.length == 1
 
     address = begin
-      BookAddress.new.set_from_string_address(args[0])
+      BookAddress.new.string_to_book_address(args[0])
     rescue StandardError
       nil
     end

@@ -23,7 +23,7 @@ class BookAddress
     "#{shelf_string}#{row_string}#{column_string}"
   end
 
-  def set_from_string_address(position)
+  def string_to_book_address(position)
     return nil if position.length != 6
 
     @shelf = Integer(position.slice(0, 2))

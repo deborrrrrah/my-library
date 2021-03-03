@@ -103,7 +103,7 @@ RSpec.describe 'Library' do
 
     it 'return 010102 when empty library' do
       result = Library.instance.find_next_empty_position
-      expected = BookAddress.new.set_from_string_address('010102')
+      expected = BookAddress.new.string_to_book_address('010102')
       expect(result).to eq(expected)
     end
 
@@ -120,7 +120,7 @@ RSpec.describe 'Library' do
                                 })
       Library.instance.take_book_from('010101')
       result = Library.instance.find_next_empty_position
-      expected = BookAddress.new.set_from_string_address('010103')
+      expected = BookAddress.new.string_to_book_address('010103')
       expect(result).to eq(expected)
     end
   end

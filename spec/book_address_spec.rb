@@ -57,14 +57,14 @@ RSpec.describe 'BookAddress' do
     end
   end
 
-  describe '#set_from_string_address' do
+  describe '#string_to_book_address' do
     it 'return right book address when set 010101' do
       book_address = BookAddress.new({
                                        shelf: 1,
                                        row: 1,
                                        column: 1
                                      })
-      result = BookAddress.new.set_from_string_address('010101')
+      result = BookAddress.new.string_to_book_address('010101')
       expect(result).to eq(book_address)
     end
 
@@ -74,7 +74,7 @@ RSpec.describe 'BookAddress' do
                                        row: 1,
                                        column: 1
                                      })
-      result = BookAddress.new.set_from_string_address('100101')
+      result = BookAddress.new.string_to_book_address('100101')
       expect(result).to eq(book_address)
     end
 
@@ -84,23 +84,23 @@ RSpec.describe 'BookAddress' do
                                        row: 99,
                                        column: 99
                                      })
-      result = BookAddress.new.set_from_string_address('999999')
+      result = BookAddress.new.string_to_book_address('999999')
       expect(result).to eq(book_address)
     end
 
     it 'return nil when set 0101010' do
-      result = BookAddress.new.set_from_string_address('0101010')
+      result = BookAddress.new.string_to_book_address('0101010')
       expect(result).to eq(nil)
     end
 
     it 'raise ArgumentError when set 01aa01' do
-      expect { BookAddress.new.set_from_string_address('01aa01') }.to raise_error(ArgumentError)
+      expect { BookAddress.new.string_to_book_address('01aa01') }.to raise_error(ArgumentError)
     end
   end
 
   describe '#valid?' do
     it 'return true for position 010101' do
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       result = book_address.valid?
       expect(result).to eq(true)
     end
@@ -122,13 +122,13 @@ RSpec.describe 'BookAddress' do
     end
 
     it 'return false for position 010001' do
-      book_address = BookAddress.new.set_from_string_address('010001')
+      book_address = BookAddress.new.string_to_book_address('010001')
       result = book_address.valid?
       expect(result).to eq(false)
     end
 
     it 'return false for position 010100' do
-      book_address = BookAddress.new.set_from_string_address('010100')
+      book_address = BookAddress.new.string_to_book_address('010100')
       result = book_address.valid?
       expect(result).to eq(false)
     end
@@ -153,28 +153,28 @@ RSpec.describe 'BookAddress' do
       }
     end
     it 'return 010102 when current is 010101' do
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       result = book_address.next_address(@size_limit)
-      expected_address = BookAddress.new.set_from_string_address('010102')
+      expected_address = BookAddress.new.string_to_book_address('010102')
       expect(result).to eq(expected_address)
     end
 
     it 'return 010201 when current is 010102' do
-      book_address = BookAddress.new.set_from_string_address('010102')
+      book_address = BookAddress.new.string_to_book_address('010102')
       result = book_address.next_address(@size_limit)
-      expected_address = BookAddress.new.set_from_string_address('010201')
+      expected_address = BookAddress.new.string_to_book_address('010201')
       expect(result).to eq(expected_address)
     end
 
     it 'return 020101 when current is 010202' do
-      book_address = BookAddress.new.set_from_string_address('010202')
+      book_address = BookAddress.new.string_to_book_address('010202')
       result = book_address.next_address(@size_limit)
-      expected_address = BookAddress.new.set_from_string_address('020101')
+      expected_address = BookAddress.new.string_to_book_address('020101')
       expect(result).to eq(expected_address)
     end
 
     it 'return nil when current is 030202' do
-      book_address = BookAddress.new.set_from_string_address('030202')
+      book_address = BookAddress.new.string_to_book_address('030202')
       result = book_address.next_address(@size_limit)
       expect(result).to eq(nil)
     end
@@ -182,7 +182,7 @@ RSpec.describe 'BookAddress' do
 
   describe '#shelf_in_range?' do
     it 'return true for position 010101 with max_size 3 and min_size 0' do
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       min_size = 0
       max_size = 3
       result = book_address.shelf_in_range?(min_size, max_size)
@@ -190,7 +190,7 @@ RSpec.describe 'BookAddress' do
     end
 
     it 'return false for position 010101 with max_size 3 and min_size 1' do
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       min_size = 1
       max_size = 3
       result = book_address.shelf_in_range?(min_size, max_size)
@@ -200,7 +200,7 @@ RSpec.describe 'BookAddress' do
 
   describe '#row_in_range?' do
     it 'return true for position 010101 with max_size 3 and min_size 0' do
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       min_size = 0
       max_size = 3
       result = book_address.row_in_range?(min_size, max_size)
@@ -208,7 +208,7 @@ RSpec.describe 'BookAddress' do
     end
 
     it 'return false for position 020101 with max_size 3 and min_size 1' do
-      book_address = BookAddress.new.set_from_string_address('020101')
+      book_address = BookAddress.new.string_to_book_address('020101')
       min_size = 1
       max_size = 3
       result = book_address.row_in_range?(min_size, max_size)
@@ -218,7 +218,7 @@ RSpec.describe 'BookAddress' do
 
   describe '#column_in_range?' do
     it 'return true for position 010101 with max_size 3 and min_size 0' do
-      book_address = BookAddress.new.set_from_string_address('010101')
+      book_address = BookAddress.new.string_to_book_address('010101')
       min_size = 0
       max_size = 3
       result = book_address.column_in_range?(min_size, max_size)
@@ -226,7 +226,7 @@ RSpec.describe 'BookAddress' do
     end
 
     it 'return false for position 020201 with max_size 3 and min_size 1' do
-      book_address = BookAddress.new.set_from_string_address('020201')
+      book_address = BookAddress.new.string_to_book_address('020201')
       min_size = 1
       max_size = 3
       result = book_address.column_in_range?(min_size, max_size)
