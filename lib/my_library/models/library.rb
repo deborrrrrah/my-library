@@ -114,6 +114,7 @@ module MyLibrary
     end
 
     def search_book_by_author(keyword)
+      check_library_initialize
       result = BookCollection.search_book_by_author(@book_collection, keyword)
       if result.empty?
         puts 'Book not found!'

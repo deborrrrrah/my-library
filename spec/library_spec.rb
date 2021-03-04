@@ -335,5 +335,11 @@ RSpec.describe MyLibrary::Library do
         expect { MyLibrary::Library.instance.list_books }.to raise_error(StandardError)
       end
     end
+
+    describe '#search_book_by_author' do
+      it 'raise StandardError of invalid Library' do
+        expect { MyLibrary::Library.instance.search_book_by_author('Kent Beck') }.to raise_error(StandardError)
+      end
+    end
   end
 end
