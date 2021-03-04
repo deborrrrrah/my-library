@@ -136,6 +136,7 @@ module MyLibrary
     end
 
     def list_books
+      check_library_initialize
       puts @book_collection
     end
 

@@ -329,5 +329,11 @@ RSpec.describe MyLibrary::Library do
         expect { MyLibrary::Library.instance.find_book('9780807281918') }.to raise_error(StandardError)
       end
     end
+
+    describe '#list_books' do
+      it 'raise StandardError of invalid Library' do
+        expect { MyLibrary::Library.instance.list_books }.to raise_error(StandardError)
+      end
+    end
   end
 end
