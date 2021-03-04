@@ -79,6 +79,7 @@ module MyLibrary
     end
 
     def take_book_from(address)
+      raise StandardError, 'Library is invalid. Please set the library in the valid size (1-99)' unless Library.instance.valid?
       if !address_valid?(address)
         puts 'Invalid code!'
         Const.instance.response[:invalid_address]

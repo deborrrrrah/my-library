@@ -312,4 +312,16 @@ RSpec.describe MyLibrary::Library do
       end
     end
   end
+
+  context 'when MyLibrary::Library is uninitialize' do
+    before(:all) do
+      MyLibrary::Library.instance.reset_size() 
+    end
+
+    describe '#take_book_from' do
+      it 'raise StandardError of invalid Library' do
+        expect { MyLibrary::Library.instance.take_book_from('010102') }.to raise_error(StandardError)
+      end
+    end
+  end
 end
