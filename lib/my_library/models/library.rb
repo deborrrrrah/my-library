@@ -78,8 +78,12 @@ module MyLibrary
       true
     end
 
-    def take_book_from(address)
+    def check_library_initialize
       raise StandardError, 'Library is invalid. Please set the library in the valid size (1-99)' unless Library.instance.valid?
+    end
+
+    def take_book_from(address)
+      check_library_initialize
       if !address_valid?(address)
         puts 'Invalid code!'
         Const.instance.response[:invalid_address]
@@ -98,6 +102,7 @@ module MyLibrary
     end
 
     def find_book(isbn)
+      check_library_initialize
       result = @book_collection.find_book(isbn)
       if result.nil?
         puts 'Book not found!'
@@ -134,6 +139,6 @@ module MyLibrary
       puts @book_collection
     end
 
-    private :address_valid?
+    private :address_valid?, :check_library_initialize
   end
 end
