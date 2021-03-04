@@ -126,6 +126,7 @@ module MyLibrary
     end
 
     def search_book_by_title(keyword)
+      check_library_initialize
       result = BookCollection.search_book_by_title(@book_collection, keyword)
       if result.empty?
         puts 'Book not found!'
