@@ -315,7 +315,7 @@ RSpec.describe MyLibrary::Library do
 
   context 'when MyLibrary::Library is uninitialize' do
     before(:all) do
-      MyLibrary::Library.instance.reset_size() 
+      MyLibrary::Library.instance.reset_size
     end
 
     describe '#take_book_from' do

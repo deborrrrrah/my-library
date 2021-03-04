@@ -79,7 +79,10 @@ module MyLibrary
     end
 
     def check_library_initialize
-      raise StandardError, 'Library is invalid. Please set the library in the valid size (1-99)' unless Library.instance.valid?
+      unless Library.instance.valid?
+        raise StandardError,
+              'Library is invalid. Please set the library in the valid size (1-99)'
+      end
     end
 
     def take_book_from(address)
